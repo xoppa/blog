@@ -66,12 +66,12 @@ public class LoadSceneTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
          
         assets = new AssetManager();
-        assets.load("data/invaderscene.g3db", Model.class);
+        assets.load("data/loadscene/invaderscene.g3db", Model.class);
         loading = true;
     }
  
     private void doneLoading() {
-        Model model = assets.get("data/invaderscene.g3db", Model.class);
+        Model model = assets.get("data/loadscene/invaderscene.g3db", Model.class);
         for (int i = 0; i < model.nodes.size; i++) {
             String id = model.nodes.get(i).id;
             ModelInstance instance = new ModelInstance(model, id);

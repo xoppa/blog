@@ -60,12 +60,12 @@ public class LoadModelsTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
          
         assets = new AssetManager();
-        assets.load("data/ship.obj", Model.class);
+        assets.load("data/loadmodels/ship.obj", Model.class);
         loading = true;
     }
  
     private void doneLoading() {
-        Model ship = assets.get("data/ship.obj", Model.class);
+        Model ship = assets.get("data/loadmodels/ship.obj", Model.class);
         ModelInstance shipInstance = new ModelInstance(ship); 
         instances.add(shipInstance);
         loading = false;

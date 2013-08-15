@@ -66,19 +66,19 @@ public class LoadSceneTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
          
         assets = new AssetManager();
-        assets.load("data/ship.obj", Model.class);
-        assets.load("data/block.obj", Model.class);
-        assets.load("data/invader.obj", Model.class);
-        assets.load("data/spacesphere.obj", Model.class);
+        assets.load("data/loadscene/ship.obj", Model.class);
+        assets.load("data/loadscene/block.obj", Model.class);
+        assets.load("data/loadscene/invader.obj", Model.class);
+        assets.load("data/loadscene/spacesphere.obj", Model.class);
         loading = true;
     }
  
     private void doneLoading() {
-        ship = new ModelInstance(assets.get("data/ship.obj", Model.class));
+        ship = new ModelInstance(assets.get("data/loadscene/ship.obj", Model.class));
         ship.transform.setToRotation(Vector3.Y, 180).trn(0, 0, 6f);
         instances.add(ship);
  
-        Model blockModel = assets.get("data/block.obj", Model.class);
+        Model blockModel = assets.get("data/loadscene/block.obj", Model.class);
         for (float x = -5f; x <= 5f; x += 2f) {
             ModelInstance block = new ModelInstance(blockModel);
             block.transform.setToTranslation(x, 0, 3f);
@@ -86,7 +86,7 @@ public class LoadSceneTest implements ApplicationListener {
             blocks.add(block);
         }
          
-        Model invaderModel = assets.get("data/invader.obj", Model.class);
+        Model invaderModel = assets.get("data/loadscene/invader.obj", Model.class);
         for (float x = -5f; x <= 5f; x += 2f) {
             for (float z = -8f; z <= 0f; z += 2f) {
                 ModelInstance invader = new ModelInstance(invaderModel);
@@ -96,7 +96,7 @@ public class LoadSceneTest implements ApplicationListener {
             }
         }
          
-        space = new ModelInstance(assets.get("data/spacesphere.obj", Model.class));
+        space = new ModelInstance(assets.get("data/loadscene/spacesphere.obj", Model.class));
          
         loading = false;
     }

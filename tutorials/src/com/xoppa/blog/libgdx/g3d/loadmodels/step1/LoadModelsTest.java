@@ -56,7 +56,7 @@ public class LoadModelsTest implements ApplicationListener {
 		cam.update();
 		
 		ModelLoader loader = new ObjLoader();
-        model = loader.loadModel(Gdx.files.internal("data/ship.obj"));
+        model = loader.loadModel(Gdx.files.internal("data/loadmodels/ship.obj"));
         instance = new ModelInstance(model);
         
         camController = new CameraInputController(cam);

@@ -72,7 +72,7 @@ public class BehindTheScenesTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
         
         ModelLoader modelLoader = new G3dModelLoader(new JsonReader());
-        ModelData modelData = modelLoader.loadModelData(Gdx.files.internal("data/invaderscene.g3dj"));
+        ModelData modelData = modelLoader.loadModelData(Gdx.files.internal("data/behindscenes/invaderscene.g3dj"));
         model = new Model(modelData, new TextureProvider.FileTextureProvider());
         doneLoading();
     }

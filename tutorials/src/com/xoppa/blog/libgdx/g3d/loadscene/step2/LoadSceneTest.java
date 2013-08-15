@@ -66,12 +66,12 @@ public class LoadSceneTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
          
         assets = new AssetManager();
-        assets.load("data/invaders.g3db", Model.class);
+        assets.load("data/loadscene/invaders.g3db", Model.class);
         loading = true;
     }
  
     private void doneLoading() {
-        Model model = assets.get("data/invaders.g3db", Model.class);
+        Model model = assets.get("data/loadscene/invaders.g3db", Model.class);
         ship = new ModelInstance(model, "ship");
         ship.transform.setToRotation(Vector3.Y, 180).trn(0, 0, 6f);
         instances.add(ship);
