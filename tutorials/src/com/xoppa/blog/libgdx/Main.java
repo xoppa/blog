@@ -81,6 +81,16 @@ public class Main extends JFrame {
 				new AppDesc("step 1: coding a scene", false, 640, 480, com.xoppa.blog.libgdx.g3d.loadscene.step1.LoadSceneTest.class),
 				new AppDesc("step 2: combining models", false, 640, 480, com.xoppa.blog.libgdx.g3d.loadscene.step2.LoadSceneTest.class),
 				new AppDesc("step 3: loading a modeled scene", false, 640, 480, com.xoppa.blog.libgdx.g3d.loadscene.step3.LoadSceneTest.class)
+		},
+		new Object[] {
+				"Behind the 3D scenes",
+				new AppDesc("step 1: base code", false, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step1.BehindTheScenesTest.class),
+				new AppDesc("step 2: using ModelLoader", false, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step2.BehindTheScenesTest.class),
+				new AppDesc("step 3: change material by NodePart", false, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step3.BehindTheScenesTest.class),
+				new AppDesc("step 4: change material by name", false, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step4.BehindTheScenesTest.class),
+				new AppDesc("step 5: change material per ModelInstance", false, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step5.BehindTheScenesTest.class),
+				new AppDesc("step 6: using a Renderable", false, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step6.BehindTheScenesTest.class),
+				new AppDesc("step 7: using a Shader", true, 640, 480, com.xoppa.blog.libgdx.g3d.behindscenes.step7.BehindTheScenesTest.class)
 		}
 	};
 	
