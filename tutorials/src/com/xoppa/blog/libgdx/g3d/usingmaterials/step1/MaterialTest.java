@@ -14,73 +14,65 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.xoppa.blog.libgdx.g3d.loadmodels.step3;
+package com.xoppa.blog.libgdx.g3d.usingmaterials.step1;
 
-import static com.xoppa.blog.libgdx.Main.data;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.lights.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.lights.Lights;
+import com.badlogic.gdx.graphics.g3d.Shader;
+import com.badlogic.gdx.graphics.g3d.materials.Material;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * See: http://blog.xoppa.com/loading-models-using-libgdx/
+ * See: http://blog.xoppa.com/using-materials-with-libgdx
  * @author Xoppa
  */
-public class LoadModelsTest implements ApplicationListener {
-    public PerspectiveCamera cam;
+public class MaterialTest implements ApplicationListener {
+	public PerspectiveCamera cam;
     public CameraInputController camController;
-    public ModelBatch modelBatch;
-    public AssetManager assets;
+    public Shader shader;
+    public Model model;
     public Array<ModelInstance> instances = new Array<ModelInstance>();
-    public Lights lights;
-    public boolean loading;
+    public ModelBatch modelBatch;
      
     @Override
     public void create () {
-        modelBatch = new ModelBatch();
-        lights = new Lights();
-        lights.ambientLight.set(0.4f, 0.4f, 0.4f, 1f);
-        lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-         
-        cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(7f, 7f, 7f);
-        cam.lookAt(0,0,0);
-        cam.near = 0.1f;
-        cam.far = 300f;
-        cam.update();
- 
-        camController = new CameraInputController(cam);
-        Gdx.input.setInputProcessor(camController);
-         
-        assets = new AssetManager();
-        assets.load("data/loadmodels/ship.obj", Model.class);
-        loading = true;
-    }
- 
-    private void doneLoading() {
-        Model ship = assets.get(data+"/ship.obj", Model.class);
-        for (float x = -5f; x <= 5f; x += 2f) {
-            for (float z = -5f; z <= 5f; z += 2f) {
-                ModelInstance shipInstance = new ModelInstance(ship);
-                shipInstance.transform.setToTranslation(x, 0, z);
-                instances.add(shipInstance);
-            }
-        }
-        loading = false;
-    }
+    	cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    	cam.position.set(0f, 8f, 8f);
+    	cam.lookAt(0,0,0);
+    	cam.near = 0.1f;
+    	cam.far = 300f;
+    	cam.update();
 
+    	camController = new CameraInputController(cam);
+    	Gdx.input.setInputProcessor(camController);
+
+        ModelBuilder modelBuilder = new ModelBuilder();
+        model = modelBuilder.createSphere(2f, 2f, 2f, 20, 20,
+        		new Material(),
+        		Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+         
+        for (int x = -5; x <= 5; x+=2) {
+        	for (int z = -5; z<=5; z+=2) {
+        		instances.add(new ModelInstance(model, x, 0, z));
+        	}
+        }
+
+        shader = new TestShader();
+        shader.init();
+
+        modelBatch = new ModelBatch();
+    }
+     
     @Override
     public void render () {
-        if (loading && assets.update())
-            doneLoading();
         camController.update();
          
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -88,15 +80,15 @@ public class LoadModelsTest implements ApplicationListener {
  
         modelBatch.begin(cam);
         for (ModelInstance instance : instances)
-            modelBatch.render(instance, lights);
+        	modelBatch.render(instance, shader);
         modelBatch.end();
     }
      
     @Override
     public void dispose () {
+        shader.dispose();
+        model.dispose();
         modelBatch.dispose();
-        instances.clear();
-        assets.dispose();
     }
 
 	@Override

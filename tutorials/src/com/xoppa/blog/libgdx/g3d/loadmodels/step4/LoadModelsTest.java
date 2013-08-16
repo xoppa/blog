@@ -16,6 +16,7 @@
 
 package com.xoppa.blog.libgdx.g3d.loadmodels.step4;
 
+import static com.xoppa.blog.libgdx.Main.data;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -60,12 +61,12 @@ public class LoadModelsTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
          
         assets = new AssetManager();
-        assets.load("data/loadmodels/ship.g3db", Model.class);
+        assets.load(data+"/ship.g3db", Model.class);
         loading = true;
     }
  
     private void doneLoading() {
-        Model ship = assets.get("data/loadmodels/ship.g3db", Model.class);
+        Model ship = assets.get(data+"/ship.g3db", Model.class);
         for (float x = -5f; x <= 5f; x += 2f) {
             for (float z = -5f; z <= 5f; z += 2f) {
                 ModelInstance shipInstance = new ModelInstance(ship);

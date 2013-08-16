@@ -16,6 +16,7 @@
 
 package com.xoppa.blog.libgdx.g3d.loadmodels.step1;
 
+import static com.xoppa.blog.libgdx.Main.data;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
@@ -56,7 +57,7 @@ public class LoadModelsTest implements ApplicationListener {
 		cam.update();
 		
 		ModelLoader loader = new ObjLoader();
-        model = loader.loadModel(Gdx.files.internal("data/loadmodels/ship.obj"));
+        model = loader.loadModel(Gdx.files.internal(data+"/ship.obj"));
         instance = new ModelInstance(model);
         
         camController = new CameraInputController(cam);

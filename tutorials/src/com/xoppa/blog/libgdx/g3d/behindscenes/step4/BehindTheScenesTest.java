@@ -16,6 +16,7 @@
 
 package com.xoppa.blog.libgdx.g3d.behindscenes.step4;
 
+import static com.xoppa.blog.libgdx.Main.data;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
@@ -72,7 +73,7 @@ public class BehindTheScenesTest implements ApplicationListener {
         Gdx.input.setInputProcessor(camController);
         
         ModelLoader modelLoader = new G3dModelLoader(new JsonReader());
-        ModelData modelData = modelLoader.loadModelData(Gdx.files.internal("data/behindscenes/invaderscene.g3dj"));
+        ModelData modelData = modelLoader.loadModelData(Gdx.files.internal(data+"/invaderscene.g3dj"));
         model = new Model(modelData, new TextureProvider.FileTextureProvider());
         doneLoading();
     }

@@ -14,71 +14,64 @@
  * limitations under the License.
  ******************************************************************************/
 
-package com.xoppa.blog.libgdx.g3d.behindscenes.step6;
+package com.xoppa.blog.libgdx.g3d.createshader.step6;
 
-import static com.xoppa.blog.libgdx.Main.data;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
-import com.badlogic.gdx.graphics.g3d.lights.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.lights.Lights;
-import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
+import com.badlogic.gdx.graphics.g3d.Shader;
+import com.badlogic.gdx.graphics.g3d.materials.Material;
 import com.badlogic.gdx.graphics.g3d.model.NodePart;
-import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.graphics.g3d.utils.TextureProvider;
-import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultTextureBinder;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 
 /**
- * See: http://blog.xoppa.com/behind-the-3d-scenes-part2/
+ * See: http://blog.xoppa.com/creating-a-shader-with-libgdx
  * @author Xoppa
  */
-public class BehindTheScenesTest implements ApplicationListener {
+public class ShaderTest implements ApplicationListener {
     public PerspectiveCamera cam;
     public CameraInputController camController;
-    public ModelBatch modelBatch;
+    public Shader shader;
+    public RenderContext renderContext;
     public Model model;
-    public Lights lights;
     public Renderable renderable;
      
     @Override
     public void create () {
-        modelBatch = new ModelBatch();
-        lights = new Lights();
-        lights.ambientLight.set(0.4f, 0.4f, 0.4f, 1f);
-        lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-         
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(2f, 2f, 2f);
         cam.lookAt(0,0,0);
         cam.near = 0.1f;
         cam.far = 300f;
         cam.update();
- 
+         
         camController = new CameraInputController(cam);
         Gdx.input.setInputProcessor(camController);
-        
-        ModelLoader modelLoader = new G3dModelLoader(new JsonReader());
-        ModelData modelData = modelLoader.loadModelData(Gdx.files.internal(data+"/invaderscene.g3dj"));
-        model = new Model(modelData, new TextureProvider.FileTextureProvider());
-
-        NodePart blockPart = model.getNode("ship").parts.get(0);
-        
+     
+        ModelBuilder modelBuilder = new ModelBuilder();
+        model = modelBuilder.createSphere(2f, 2f, 2f, 20, 20, 
+          new Material(),
+          Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+     
+        NodePart blockPart = model.nodes.get(0).parts.get(0);
+          
         renderable = new Renderable();
-        renderable.mesh = blockPart.meshPart.mesh;
-        renderable.meshPartOffset = blockPart.meshPart.indexOffset;
-        renderable.meshPartSize = blockPart.meshPart.numVertices;
-        renderable.primitiveType = blockPart.meshPart.primitiveType;
-        renderable.material = blockPart.material;
-        renderable.lights = lights;
+        blockPart.setRenderable(renderable);
+        renderable.lights = null;
         renderable.worldTransform.idt();
+          
+        renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.WEIGHTED, 1));
+        shader = new TestShader();
+        shader.init();
     }
-
+     
     @Override
     public void render () {
         camController.update();
@@ -86,14 +79,16 @@ public class BehindTheScenesTest implements ApplicationListener {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
  
-        modelBatch.begin(cam);
-        modelBatch.render(renderable);
-        modelBatch.end();
+        renderContext.begin();
+        shader.begin(cam, renderContext);
+        shader.render(renderable);
+        shader.end();
+        renderContext.end();
     }
      
     @Override
     public void dispose () {
-        modelBatch.dispose();
+        shader.dispose();
         model.dispose();
     }
 
