@@ -23,14 +23,14 @@ import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.lights.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.lights.Lights;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
-import com.badlogic.gdx.graphics.g3d.materials.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.materials.Material;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
@@ -48,7 +48,7 @@ public class BehindTheScenesTest implements ApplicationListener {
     public ModelBatch modelBatch;
     public Model model;
     public Array<ModelInstance> instances = new Array<ModelInstance>();
-    public Lights lights;
+    public Environment lights;
      
     public Array<ModelInstance> blocks = new Array<ModelInstance>();
     public Array<ModelInstance> invaders = new Array<ModelInstance>();
@@ -58,8 +58,8 @@ public class BehindTheScenesTest implements ApplicationListener {
     @Override
     public void create () {
         modelBatch = new ModelBatch();
-        lights = new Lights();
-        lights.ambientLight.set(0.4f, 0.4f, 0.4f, 1f);
+        lights = new Environment();
+        lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
          
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

@@ -17,6 +17,7 @@
 package com.xoppa.blog.libgdx;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -119,11 +121,12 @@ public class Main extends JFrame {
 				new AppDesc("step 6: add another color", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step6.MaterialTest.class, "usingmaterials/data"),
 				new AppDesc("step 7: use custom attribute", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step7.MaterialTest.class, "usingmaterials/data"),
 				new AppDesc("step 8: update canRender", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step8.MaterialTest.class, "usingmaterials/data"),
-				new AppDesc("step 8: create custom attribute", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step9.MaterialTest.class, "usingmaterials/data")
+				new AppDesc("step 9: create custom attribute", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step9.MaterialTest.class, "usingmaterials/data")
 		}
 	};
 	
-	public static boolean runApp(final AppDesc appDesc) {
+	LwjglAWTCanvas currentTest = null;
+	public boolean runApp(final AppDesc appDesc) {
 		ApplicationListener listener;
 		try {
 			listener = appDesc.clazz.newInstance();
@@ -132,14 +135,16 @@ public class Main extends JFrame {
 		} catch (IllegalAccessException e) {
 			return false;
 		}
-		data = (appDesc.data == null || appDesc.data.isEmpty()) ? "data" : appDesc.data; 
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = appDesc.width;
-		config.height = appDesc.height;
-		config.title = appDesc.title;
-		config.useGL20 = appDesc.useGL20;
-		config.forceExit = false;
-		new LwjglApplication(listener, config);
+		data = (appDesc.data == null || appDesc.data.isEmpty()) ? "data" : appDesc.data;
+		
+		Container container = getContentPane();
+		if (currentTest != null)
+			container.remove(currentTest.getCanvas());
+		
+		currentTest = new LwjglAWTCanvas(listener, appDesc.useGL20);
+		currentTest.getCanvas().setSize(appDesc.width, appDesc.height);
+		container.add(currentTest.getCanvas(), BorderLayout.CENTER);
+		pack();
 		return true;
 	}
 	
@@ -151,9 +156,12 @@ public class Main extends JFrame {
 	public Main() throws HeadlessException {
 		super("Xoppa Libgdx Tutorials");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(new AppList());
+		Container container = getContentPane();
+		JPanel appList = new AppList();
+		appList.setSize(250, 600);
+		container.add(appList, BorderLayout.LINE_START);
 		pack();
-		setSize(250, 600);
+		setSize(900, 600);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -190,7 +198,7 @@ public class Main extends JFrame {
 					Object obj = ((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).getUserObject();
 					if (obj instanceof AppDesc) {
 						AppDesc app = (AppDesc)obj;
-						dispose();
+						//dispose();
 						runApp(app);
 					}
 				}

@@ -22,11 +22,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.Shader;
-import com.badlogic.gdx.graphics.g3d.lights.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.lights.Lights;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
@@ -47,13 +48,13 @@ public class BehindTheScenesTest implements ApplicationListener {
     public Shader shader;
     public RenderContext renderContext;
     public Model model;
-    public Lights lights;
+    public Environment lights;
     public Renderable renderable;
      
     @Override
     public void create () {
-        lights = new Lights();
-        lights.ambientLight.set(0.4f, 0.4f, 0.4f, 1f);
+        lights = new Environment();
+        lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
          
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -78,11 +79,11 @@ public class BehindTheScenesTest implements ApplicationListener {
         renderable.meshPartSize = blockPart.meshPart.numVertices;
         renderable.primitiveType = blockPart.meshPart.primitiveType;
         renderable.material = blockPart.material;
-        renderable.lights = lights;
+        renderable.environment = lights;
         renderable.worldTransform.idt();
          
         renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.WEIGHTED, 1));
-        shader = new DefaultShader(renderable, true, false, 1, 0, 0, 0);
+        shader = new DefaultShader(renderable);
         shader.init();
     }
      
