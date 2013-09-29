@@ -42,7 +42,7 @@ public class LoadSceneTest implements ApplicationListener {
     public ModelBatch modelBatch;
     public AssetManager assets;
     public Array<ModelInstance> instances = new Array<ModelInstance>();
-    public Environment lights;
+    public Environment environment;
     public boolean loading;
      
     public Array<ModelInstance> blocks = new Array<ModelInstance>();
@@ -53,9 +53,9 @@ public class LoadSceneTest implements ApplicationListener {
     @Override
     public void create () {
         modelBatch = new ModelBatch();
-        lights = new Environment();
-        lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-        lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
          
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(0f, 7f, 10f);
@@ -109,8 +109,7 @@ public class LoadSceneTest implements ApplicationListener {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
  
         modelBatch.begin(cam);
-        for (ModelInstance instance : instances)
-            modelBatch.render(instance, lights);
+        modelBatch.render(instances, environment);
         if (space != null)
             modelBatch.render(space);
         modelBatch.end();

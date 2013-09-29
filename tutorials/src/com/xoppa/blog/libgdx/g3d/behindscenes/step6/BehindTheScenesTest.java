@@ -44,15 +44,15 @@ public class BehindTheScenesTest implements ApplicationListener {
     public CameraInputController camController;
     public ModelBatch modelBatch;
     public Model model;
-    public Environment lights;
+    public Environment environment;
     public Renderable renderable;
      
     @Override
     public void create () {
         modelBatch = new ModelBatch();
-        lights = new Environment();
-        lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-        lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
          
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(2f, 2f, 2f);
@@ -76,7 +76,7 @@ public class BehindTheScenesTest implements ApplicationListener {
         renderable.meshPartSize = blockPart.meshPart.numVertices;
         renderable.primitiveType = blockPart.meshPart.primitiveType;
         renderable.material = blockPart.material;
-        renderable.environment = lights;
+        renderable.environment = environment;
         renderable.worldTransform.idt();
     }
 

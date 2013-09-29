@@ -37,7 +37,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
  * @author Xoppa
  */
 public class Basic3DTest implements ApplicationListener {
-	public Environment lights;
+	public Environment environment;
 	public PerspectiveCamera cam;
 	public CameraInputController camController;
 	public ModelBatch modelBatch;
@@ -46,9 +46,9 @@ public class Basic3DTest implements ApplicationListener {
 
 	@Override
 	public void create() {
-		lights = new Environment();
-		lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-		lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+		environment = new Environment();
+		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 		
 		modelBatch = new ModelBatch();
 		
@@ -77,7 +77,7 @@ public class Basic3DTest implements ApplicationListener {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
  
         modelBatch.begin(cam);
-        modelBatch.render(instance, lights);
+        modelBatch.render(instance, environment);
         modelBatch.end();
 	}
 	

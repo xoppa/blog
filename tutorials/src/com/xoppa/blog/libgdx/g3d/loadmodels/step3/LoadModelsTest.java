@@ -41,26 +41,26 @@ public class LoadModelsTest implements ApplicationListener {
     public ModelBatch modelBatch;
     public AssetManager assets;
     public Array<ModelInstance> instances = new Array<ModelInstance>();
-    public Environment lights;
+    public Environment environment;
     public boolean loading;
      
     @Override
     public void create () {
         modelBatch = new ModelBatch();
-        lights = new Environment();
-        lights.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-        lights.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-         
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(7f, 7f, 7f);
         cam.lookAt(0,0,0);
         cam.near = 0.1f;
         cam.far = 300f;
         cam.update();
- 
+
         camController = new CameraInputController(cam);
         Gdx.input.setInputProcessor(camController);
-         
+
         assets = new AssetManager();
         assets.load("data/loadmodels/ship.obj", Model.class);
         loading = true;
@@ -88,8 +88,7 @@ public class LoadModelsTest implements ApplicationListener {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
  
         modelBatch.begin(cam);
-        for (ModelInstance instance : instances)
-            modelBatch.render(instance, lights);
+        modelBatch.render(instances, environment);
         modelBatch.end();
     }
      
