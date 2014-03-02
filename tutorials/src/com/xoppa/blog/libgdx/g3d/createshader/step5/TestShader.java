@@ -54,7 +54,7 @@ public class TestShader implements Shader {
 		this.camera = camera;
 		this.context = context;
 		program.begin();
-		program.setUniformMatrix("u_projTrans", camera.combined);
+		program.setUniformMatrix("u_projViewTrans", camera.combined);
 		context.setDepthTest(GL20.GL_LEQUAL);
 		context.setCullFace(GL20.GL_BACK);
 	}

@@ -44,7 +44,7 @@ public class TestShader implements Shader {
         program = new ShaderProgram(vert, frag);
         if (!program.isCompiled())
             throw new GdxRuntimeException(program.getLog());
-        u_projTrans = program.getUniformLocation("u_projTrans");
+        u_projTrans = program.getUniformLocation("u_projViewTrans");
         u_worldTrans = program.getUniformLocation("u_worldTrans");
 	}
 
