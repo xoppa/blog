@@ -1,0 +1,174 @@
+/*******************************************************************************
+ * Copyright 2011 See AUTHORS file.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+
+package com.xoppa.blog.libgdx.g3d.frustumculling.step2;
+
+import static com.xoppa.blog.libgdx.Main.data;
+
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.model.Node;
+import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Array;
+
+/**
+ * See: http://blog.xoppa.com/basic-3d-using-libgdx-2/
+ * @author Xoppa
+ */
+public class FrustumCullingTest implements ApplicationListener {
+	protected PerspectiveCamera cam;
+	protected CameraInputController camController;
+	protected ModelBatch modelBatch;
+	protected AssetManager assets;
+	protected Array<ModelInstance> instances = new Array<ModelInstance>();
+	protected Environment environment;
+	protected boolean loading;
+     
+	protected Array<ModelInstance> blocks = new Array<ModelInstance>();
+	protected Array<ModelInstance> invaders = new Array<ModelInstance>();
+	protected ModelInstance ship;
+	protected ModelInstance space;
+    
+	protected Stage stage;
+	protected Label label;
+	protected BitmapFont font;
+	protected StringBuilder stringBuilder;
+     
+    @Override
+    public void create () {
+		stage = new Stage();
+		font = new BitmapFont();
+		label = new Label(" ", new Label.LabelStyle(font, Color.WHITE));
+		stage.addActor(label);
+		stringBuilder = new StringBuilder();
+    	
+        modelBatch = new ModelBatch();
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+         
+        cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam.position.set(0f, 7f, 10f);
+        cam.lookAt(0,0,0);
+        cam.near = 0.1f;
+        cam.far = 300f;
+        cam.update();
+ 
+        camController = new CameraInputController(cam);
+        Gdx.input.setInputProcessor(camController);
+         
+        assets = new AssetManager();
+        assets.load(data+"/invaderscene.g3db", Model.class);
+        loading = true;
+    }
+ 
+    private void doneLoading() {
+        Model model = assets.get(data+"/invaderscene.g3db", Model.class);
+        for (int i = 0; i < model.nodes.size; i++) {
+            String id = model.nodes.get(i).id;
+            ModelInstance instance = new ModelInstance(model, id, true);
+
+            if (id.equals("space")) {
+                space = instance;
+                continue;
+            }
+
+            instances.add(instance);
+
+            if (id.equals("ship"))
+                ship = instance;
+            else if (id.startsWith("block"))
+                blocks.add(instance);
+            else if (id.startsWith("invader"))
+                invaders.add(instance);
+        }
+     
+        loading = false;
+    }
+     
+    private int visibleCount;
+    @Override
+    public void render () {
+        if (loading && assets.update())
+            doneLoading();
+        camController.update();
+         
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+ 
+        modelBatch.begin(cam);
+        visibleCount = 0;
+        for (final ModelInstance instance : instances) {
+        	if (isVisible(cam, instance)) {
+        		modelBatch.render(instance, environment);
+        		visibleCount++;
+        	}
+        }
+        if (space != null)
+            modelBatch.render(space);
+        modelBatch.end();
+        
+        stringBuilder.setLength(0);
+        stringBuilder.append(" FPS: ").append(Gdx.graphics.getFramesPerSecond());
+        stringBuilder.append(" Visible: ").append(visibleCount);
+        label.setText(stringBuilder);
+        stage.draw();
+    }
+    
+    private Vector3 position = new Vector3();
+    protected boolean isVisible(final Camera cam, final ModelInstance instance) {
+    	instance.transform.getTranslation(position);
+    	return cam.frustum.pointInFrustum(position);
+    }
+     
+    @Override
+    public void dispose () {
+        modelBatch.dispose();
+        instances.clear();
+        assets.dispose();
+    }
+
+	@Override
+	public void resize(int width, int height) {
+	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
+	}
+}

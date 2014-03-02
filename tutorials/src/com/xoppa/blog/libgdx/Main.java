@@ -38,10 +38,10 @@ import javax.swing.tree.TreeSelectionModel;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 public class Main extends JFrame {
+	private static final long serialVersionUID = -4296204662394260962L;
+
 	public static String data;
 	
 	public static class AppDesc {
@@ -122,6 +122,13 @@ public class Main extends JFrame {
 				new AppDesc("step 7: use custom attribute", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step7.MaterialTest.class, "usingmaterials/data"),
 				new AppDesc("step 8: update canRender", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step8.MaterialTest.class, "usingmaterials/data"),
 				new AppDesc("step 9: create custom attribute", true, 640, 480, com.xoppa.blog.libgdx.g3d.usingmaterials.step9.MaterialTest.class, "usingmaterials/data")
+		},
+		new Object[] {
+				"3D Frustum culling",
+				new AppDesc("step 1: no frustum culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step1.FrustumCullingTest.class, "loadscene/data"),
+				new AppDesc("step 2: position culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step2.FrustumCullingTest.class, "loadscene/data"),
+				new AppDesc("step 3: bounds culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step3.FrustumCullingTest.class, "loadscene/data"),
+				new AppDesc("step 3: sphere culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step4.FrustumCullingTest.class, "loadscene/data")
 		}
 	};
 	
@@ -167,6 +174,8 @@ public class Main extends JFrame {
 	}
 	
 	class AppList extends JPanel {
+		private static final long serialVersionUID = 1582559224991888475L;
+
 		public AppList () {
 			setLayout(new BorderLayout());
 
