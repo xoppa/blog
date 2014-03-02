@@ -25,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * See: http://blog.xoppa.com/basic-3d-using-libgdx-2/
+ * See: http://blog.xoppa.com/3d-frustum-culling-with-libgdx
  * @author Xoppa
  */
 public class FrustumCullingTest implements ApplicationListener {
