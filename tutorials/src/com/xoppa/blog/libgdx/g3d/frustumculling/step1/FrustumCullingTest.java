@@ -64,7 +64,6 @@ public class FrustumCullingTest implements ApplicationListener {
     @Override
     public void create () {
 		stage = new Stage();
-		stage.getCamera().position.set(Gdx.graphics.getWidth()*0.5f, Gdx.graphics.getHeight()*0.5f, 0f);
 		font = new BitmapFont();
 		label = new Label(" ", new Label.LabelStyle(font, Color.WHITE));
 		stage.addActor(label);
@@ -156,7 +155,7 @@ public class FrustumCullingTest implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		stage.getViewport().update(width, height);
+		stage.getViewport().update(width, height, true);
 	}
 
 	@Override
