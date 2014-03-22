@@ -128,7 +128,13 @@ public class Main extends JFrame {
 				new AppDesc("step 1: no frustum culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step1.FrustumCullingTest.class, "loadscene/data"),
 				new AppDesc("step 2: position culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step2.FrustumCullingTest.class, "loadscene/data"),
 				new AppDesc("step 3: bounds culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step3.FrustumCullingTest.class, "loadscene/data"),
-				new AppDesc("step 3: sphere culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step4.FrustumCullingTest.class, "loadscene/data")
+				new AppDesc("step 4: sphere culling", false, 640, 480, com.xoppa.blog.libgdx.g3d.frustumculling.step4.FrustumCullingTest.class, "loadscene/data")
+		},
+		new Object[] {
+				"Ray picking",
+				new AppDesc("step 1: selecting objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.raypicking.step1.RayPickingTest.class, "loadscene/data"),
+				new AppDesc("step 2: moving objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.raypicking.step2.RayPickingTest.class, "loadscene/data"),
+				new AppDesc("step 3: preciser selecting objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.raypicking.step3.RayPickingTest.class, "loadscene/data")
 		}
 	};
 	
