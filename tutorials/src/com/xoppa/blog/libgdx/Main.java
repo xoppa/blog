@@ -135,6 +135,13 @@ public class Main extends JFrame {
 				new AppDesc("step 1: selecting objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.raypicking.step1.RayPickingTest.class, "loadscene/data"),
 				new AppDesc("step 2: moving objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.raypicking.step2.RayPickingTest.class, "loadscene/data"),
 				new AppDesc("step 3: preciser selecting objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.raypicking.step3.RayPickingTest.class, "loadscene/data")
+		},
+		new Object[] {
+			"Shapes",
+			new AppDesc("step 1: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step1.ShapeTest.class, "loadscene/data"),
+			new AppDesc("step 2: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step2.ShapeTest.class, "loadscene/data"),
+			new AppDesc("step 3: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step3.ShapeTest.class, "loadscene/data"),
+			new AppDesc("step 4: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step4.ShapeTest.class, "loadscene/data")
 		}
 	};
 	
