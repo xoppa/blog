@@ -29,6 +29,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
+/** @see <a href="http://blog.xoppa.com/using-collision-shapes/">Using collision shapes</a>
+ * @author Xoppa */
 public class ShapeTest extends InputAdapter implements ApplicationListener {
 	public interface Shape {
 		public abstract boolean isVisible(Matrix4 transform, Camera cam);

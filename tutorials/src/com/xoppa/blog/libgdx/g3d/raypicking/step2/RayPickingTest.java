@@ -29,6 +29,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
+/** @see <a href="http://blog.xoppa.com/interacting-with-3d-objects/"Interacting with 3d objects</a>
+ * @author Xoppa */
 public class RayPickingTest extends InputAdapter implements ApplicationListener {
 	public static class GameObject extends ModelInstance {
 		public final Vector3 center = new Vector3();

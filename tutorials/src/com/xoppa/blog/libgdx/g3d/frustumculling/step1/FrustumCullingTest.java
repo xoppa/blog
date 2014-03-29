@@ -32,16 +32,13 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * See: http://blog.xoppa.com/3d-frustum-culling-with-libgdx
- * @author Xoppa
- */
+/** See: http://blog.xoppa.com/3d-frustum-culling-with-libgdx
+ * @author Xoppa */
 public class FrustumCullingTest implements ApplicationListener {
 	protected PerspectiveCamera cam;
 	protected CameraInputController camController;

@@ -20,15 +20,15 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
-import com.xoppa.blog.libgdx.g3d.raypicking.step2.RayPickingTest.GameObject;
 
+/** @see <a href="http://blog.xoppa.com/interacting-with-3d-objects/"Interacting with 3d objects</a>
+ * @author Xoppa */
 public class RayPickingTest extends InputAdapter implements ApplicationListener {
 	public static class GameObject extends ModelInstance {
 		public final Vector3 center = new Vector3();

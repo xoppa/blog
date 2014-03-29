@@ -23,10 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * See: http://blog.xoppa.com/3d-frustum-culling-with-libgdx
- * @author Xoppa
- */
+/** See: http://blog.xoppa.com/3d-frustum-culling-with-libgdx
+ * @author Xoppa */
 public class FrustumCullingTest implements ApplicationListener {
 	public static class GameObject extends ModelInstance {
 		public final Vector3 center = new Vector3();
