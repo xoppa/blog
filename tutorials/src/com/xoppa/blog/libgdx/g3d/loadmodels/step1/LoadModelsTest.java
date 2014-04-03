@@ -53,7 +53,7 @@ public class LoadModelsTest implements ApplicationListener {
 		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.position.set(1f, 1f, 1f);
 		cam.lookAt(0,0,0);
-		cam.near = 0.1f;
+		cam.near = 1f;
 		cam.far = 300f;
 		cam.update();
 		

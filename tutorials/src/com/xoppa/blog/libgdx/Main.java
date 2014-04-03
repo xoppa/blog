@@ -138,10 +138,10 @@ public class Main extends JFrame {
 		},
 		new Object[] {
 			"Shapes",
-			new AppDesc("step 1: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step1.ShapeTest.class, "loadscene/data"),
-			new AppDesc("step 2: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step2.ShapeTest.class, "loadscene/data"),
-			new AppDesc("step 3: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step3.ShapeTest.class, "loadscene/data"),
-			new AppDesc("step 4: ", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step4.ShapeTest.class, "loadscene/data")
+			new AppDesc("step 1: move code to GameObject", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step1.ShapeTest.class, "loadscene/data"),
+			new AppDesc("step 2: Sphere shape", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step2.ShapeTest.class, "loadscene/data"),
+			new AppDesc("step 3: Box shape", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step3.ShapeTest.class, "loadscene/data"),
+			new AppDesc("step 4: Disc shape", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step4.ShapeTest.class, "loadscene/data")
 		}
 	};
 	

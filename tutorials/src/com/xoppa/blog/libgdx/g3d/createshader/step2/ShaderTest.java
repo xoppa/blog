@@ -19,7 +19,6 @@ package com.xoppa.blog.libgdx.g3d.createshader.step2;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
@@ -50,7 +49,7 @@ public class ShaderTest implements ApplicationListener {
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(2f, 2f, 2f);
         cam.lookAt(0,0,0);
-        cam.near = 0.1f;
+        cam.near = 1f;
         cam.far = 300f;
         cam.update();
          
