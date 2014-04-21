@@ -142,6 +142,17 @@ public class Main extends JFrame {
 			new AppDesc("step 2: Sphere shape", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step2.ShapeTest.class, "loadscene/data"),
 			new AppDesc("step 3: Box shape", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step3.ShapeTest.class, "loadscene/data"),
 			new AppDesc("step 4: Disc shape", false, 640, 480, com.xoppa.blog.libgdx.g3d.shapes.step4.ShapeTest.class, "loadscene/data")
+		},
+		new Object[] {
+			"Bullet",
+			new AppDesc("step 1: no collision detection", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step1.BulletTest.class),
+			new AppDesc("step 2: using a collision algorithm", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step2.BulletTest.class),
+			new AppDesc("step 3: using a collision dispatcher", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step3.BulletTest.class),
+			new AppDesc("step 4: add more objects", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step4.BulletTest.class),
+			new AppDesc("step 5: using a ContactListener", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step5.BulletTest.class),
+			new AppDesc("step 6: optimize the callback method", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step6.BulletTest.class),
+			new AppDesc("step 7: using a collision world", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step7.BulletTest.class),
+			new AppDesc("step 8: using collision filtering", false, 640, 480, com.xoppa.blog.libgdx.g3d.bullet.step8.BulletTest.class)
 		}
 	};
 	
