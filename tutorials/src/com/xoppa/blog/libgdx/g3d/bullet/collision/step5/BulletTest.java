@@ -1,4 +1,4 @@
-package com.xoppa.blog.libgdx.g3d.bullet.step5;
+package com.xoppa.blog.libgdx.g3d.bullet.collision.step5;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;

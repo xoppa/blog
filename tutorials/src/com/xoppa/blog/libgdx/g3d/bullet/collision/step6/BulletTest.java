@@ -1,4 +1,5 @@
-package com.xoppa.blog.libgdx.g3d.bullet.step8;
+
+package com.xoppa.blog.libgdx.g3d.bullet.collision.step6;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -18,30 +19,27 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.Bullet;
+import com.badlogic.gdx.physics.bullet.collision.CollisionObjectWrapper;
 import com.badlogic.gdx.physics.bullet.collision.ContactListener;
 import com.badlogic.gdx.physics.bullet.collision.btBoxShape;
-import com.badlogic.gdx.physics.bullet.collision.btBroadphaseInterface;
 import com.badlogic.gdx.physics.bullet.collision.btCapsuleShape;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionAlgorithm;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionConfiguration;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionDispatcher;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
 import com.badlogic.gdx.physics.bullet.collision.btConeShape;
 import com.badlogic.gdx.physics.bullet.collision.btCylinderShape;
-import com.badlogic.gdx.physics.bullet.collision.btDbvtBroadphase;
 import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration;
 import com.badlogic.gdx.physics.bullet.collision.btDispatcher;
+import com.badlogic.gdx.physics.bullet.collision.btDispatcherInfo;
+import com.badlogic.gdx.physics.bullet.collision.btManifoldResult;
 import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
 public class BulletTest implements ApplicationListener {
-	final static short GROUND_FLAG = 1<<8;
-	final static short OBJECT_FLAG = 1<<9;
-	final static short ALL_FLAG = -1;
-	
 	class MyContactListener extends ContactListener {
 		@Override
 		public boolean onContactAdded (int userValue0, int partId0, int index0, int userValue1, int partId1, int index1) {
@@ -100,8 +98,6 @@ public class BulletTest implements ApplicationListener {
 	btCollisionConfiguration collisionConfig;
 	btDispatcher dispatcher;
 	MyContactListener contactListener;
-	btBroadphaseInterface broadphase;
-	btCollisionWorld collisionWorld;
 
 	@Override
 	public void create () {
@@ -152,16 +148,13 @@ public class BulletTest implements ApplicationListener {
 		constructors.put("capsule", new GameObject.Constructor(model, "capsule", new btCapsuleShape(.5f, 1f)));
 		constructors.put("cylinder", new GameObject.Constructor(model, "cylinder", new btCylinderShape(new Vector3(.5f, 1f, .5f))));
 
+		instances = new Array<GameObject>();
+		instances.add(constructors.get("ground").construct());
+
 		collisionConfig = new btDefaultCollisionConfiguration();
 		dispatcher = new btCollisionDispatcher(collisionConfig);
-		broadphase = new btDbvtBroadphase();
-		collisionWorld = new btCollisionWorld(dispatcher, broadphase, collisionConfig);
+
 		contactListener = new MyContactListener();
-		
-		instances = new Array<GameObject>();
-		GameObject object = constructors.get("ground").construct();
-		instances.add(object);
-		collisionWorld.addCollisionObject(object.body, GROUND_FLAG, ALL_FLAG);
 	}
 
 	public void spawn () {
@@ -173,7 +166,6 @@ public class BulletTest implements ApplicationListener {
 		obj.body.setUserValue(instances.size);
 		obj.body.setCollisionFlags(obj.body.getCollisionFlags() | btCollisionObject.CollisionFlags.CF_CUSTOM_MATERIAL_CALLBACK);
 		instances.add(obj);
-		collisionWorld.addCollisionObject(obj.body, OBJECT_FLAG, GROUND_FLAG);
 	}
 
 	@Override
@@ -184,10 +176,9 @@ public class BulletTest implements ApplicationListener {
 			if (obj.moving) {
 				obj.transform.trn(0f, -delta, 0f);
 				obj.body.setWorldTransform(obj.transform);
+				checkCollision(obj.body, instances.get(0).body);
 			}
 		}
-		
-		collisionWorld.performDiscreteCollisionDetection();
 
 		if ((spawnTimer -= delta) < 0) {
 			spawn();
@@ -204,6 +195,28 @@ public class BulletTest implements ApplicationListener {
 		modelBatch.end();
 	}
 
+	boolean checkCollision (btCollisionObject obj0, btCollisionObject obj1) {
+		CollisionObjectWrapper co0 = new CollisionObjectWrapper(obj0);
+		CollisionObjectWrapper co1 = new CollisionObjectWrapper(obj1);
+
+		btCollisionAlgorithm algorithm = dispatcher.findAlgorithm(co0.wrapper, co1.wrapper);
+
+		btDispatcherInfo info = new btDispatcherInfo();
+		btManifoldResult result = new btManifoldResult(co0.wrapper, co1.wrapper);
+
+		algorithm.processCollision(co0.wrapper, co1.wrapper, info, result);
+
+		boolean r = result.getPersistentManifold().getNumContacts() > 0;
+
+		dispatcher.freeCollisionAlgorithm(algorithm.getCPointer());
+		result.dispose();
+		info.dispose();
+		co1.dispose();
+		co0.dispose();
+
+		return r;
+	}
+
 	@Override
 	public void dispose () {
 		for (GameObject obj : instances)
@@ -214,8 +227,6 @@ public class BulletTest implements ApplicationListener {
 			ctor.dispose();
 		constructors.clear();
 
-		collisionWorld.dispose();
-		broadphase.dispose();
 		dispatcher.dispose();
 		collisionConfig.dispose();
 

@@ -1,4 +1,4 @@
-package com.xoppa.blog.libgdx.g3d.bullet.step2;
+package com.xoppa.blog.libgdx.g3d.bullet.collision.step1;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -15,22 +15,6 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.bullet.Bullet;
-import com.badlogic.gdx.physics.bullet.collision.CollisionObjectWrapper;
-import com.badlogic.gdx.physics.bullet.collision.btBoxShape;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionAlgorithm;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionAlgorithmConstructionInfo;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionConfiguration;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionDispatcher;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
-import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
-import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration;
-import com.badlogic.gdx.physics.bullet.collision.btDispatcher;
-import com.badlogic.gdx.physics.bullet.collision.btDispatcherInfo;
-import com.badlogic.gdx.physics.bullet.collision.btManifoldResult;
-import com.badlogic.gdx.physics.bullet.collision.btSphereBoxCollisionAlgorithm;
-import com.badlogic.gdx.physics.bullet.collision.btSphereShape;
 import com.badlogic.gdx.utils.Array;
 
 public class BulletTest implements ApplicationListener {
@@ -44,20 +28,11 @@ public class BulletTest implements ApplicationListener {
 	ModelInstance ball;
 	boolean collision;
 	
-	btCollisionShape groundShape;
-	btCollisionShape ballShape;
-	
-	btCollisionObject groundObject;
-	btCollisionObject ballObject;
-	
-	btCollisionConfiguration collisionConfig;
-	btDispatcher dispatcher;
 	
 	@Override
 	public void create () {
-		Bullet.init();
-		
 		modelBatch = new ModelBatch();
+		
 		environment = new Environment();
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
@@ -87,20 +62,6 @@ public class BulletTest implements ApplicationListener {
 		instances = new Array<ModelInstance>();
 		instances.add(ground);
 		instances.add(ball);
-		
-		ballShape = new btSphereShape(0.5f);
-		groundShape = new btBoxShape(new Vector3(2.5f, 0.5f, 2.5f));
-		
-		groundObject = new btCollisionObject();
-		groundObject.setCollisionShape(groundShape);
-		groundObject.setWorldTransform(ground.transform);
-		
-		ballObject = new btCollisionObject();
-		ballObject.setCollisionShape(ballShape);
-		ballObject.setWorldTransform(ball.transform);
-		
-		collisionConfig = new btDefaultCollisionConfiguration();
-		dispatcher = new btCollisionDispatcher(collisionConfig);
 	}
 	
 	@Override
@@ -109,8 +70,6 @@ public class BulletTest implements ApplicationListener {
 		
 		if (!collision) {
 			ball.transform.translate(0f, -delta, 0f);
-			ballObject.setWorldTransform(ball.transform);
-			
 			collision = checkCollision();
 		}
 		
@@ -125,41 +84,11 @@ public class BulletTest implements ApplicationListener {
 	}
 	
 	boolean checkCollision() {
-		CollisionObjectWrapper co0 = new CollisionObjectWrapper(ballObject);
-		CollisionObjectWrapper co1 = new CollisionObjectWrapper(groundObject);
-		
-		btCollisionAlgorithmConstructionInfo ci = new btCollisionAlgorithmConstructionInfo();
-		ci.setDispatcher1(dispatcher);
-		btCollisionAlgorithm algorithm = new btSphereBoxCollisionAlgorithm(null, ci, co0.wrapper, co1.wrapper, false); 
-
-		btDispatcherInfo info = new btDispatcherInfo();
-		btManifoldResult result = new btManifoldResult(co0.wrapper, co1.wrapper);
-		
-		algorithm.processCollision(co0.wrapper, co1.wrapper, info, result);
-		
-		boolean r = result.getPersistentManifold().getNumContacts() > 0;
-		
-		result.dispose();
-		info.dispose();
-		algorithm.dispose();
-		ci.dispose();
-		co1.dispose();
-		co0.dispose();
-		
-		return r;
+		return false;
 	}
 	
 	@Override
-	public void dispose () {		
-		groundObject.dispose();
-		groundShape.dispose();
-		
-		ballObject.dispose();
-		ballShape.dispose();
-		
-		dispatcher.dispose();
-		collisionConfig.dispose();
-		
+	public void dispose () {
 		modelBatch.dispose();
 		model.dispose();
 	}
