@@ -44,8 +44,8 @@ public class ShapeTest extends InputAdapter implements ApplicationListener {
 		public final Vector3 dimensions = new Vector3();
 		
 		public BaseShape(BoundingBox bounds) {
-			center.set(bounds.getCenter());
-			dimensions.set(bounds.getDimensions());
+			bounds.getCenter(center);
+			bounds.getDimensions(dimensions);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class ShapeTest extends InputAdapter implements ApplicationListener {
 		
 		public Sphere(BoundingBox bounds) {
 			super(bounds);
-			radius = bounds.getDimensions().len() / 2f;
+			radius = dimensions.len() / 2f;
 		}
 		
 		@Override

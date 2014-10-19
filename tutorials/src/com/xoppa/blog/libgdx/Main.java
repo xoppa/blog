@@ -25,6 +25,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -203,6 +205,14 @@ public class Main extends JFrame {
 		setSize(900, 600);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				if (currentTest != null)
+					currentTest.exit();
+			}
+		});
 	}
 	
 	class AppList extends JPanel {

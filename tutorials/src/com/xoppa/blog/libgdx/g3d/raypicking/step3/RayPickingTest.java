@@ -40,8 +40,8 @@ public class RayPickingTest extends InputAdapter implements ApplicationListener 
 		public GameObject (Model model, String rootNode, boolean mergeTransform) {
 			super(model, rootNode, mergeTransform);
 			calculateBoundingBox(bounds);
-			center.set(bounds.getCenter());
-			dimensions.set(bounds.getDimensions());
+			bounds.getCenter(center);
+			bounds.getDimensions(dimensions);
 			radius = dimensions.len() / 2f;
 		}
 	}

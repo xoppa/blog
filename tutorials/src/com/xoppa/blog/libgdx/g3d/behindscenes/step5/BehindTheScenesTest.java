@@ -20,7 +20,6 @@ import static com.xoppa.blog.libgdx.Main.data;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -30,7 +29,6 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
-import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.graphics.g3d.model.data.ModelData;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
@@ -72,7 +70,7 @@ public class BehindTheScenesTest implements ApplicationListener {
         camController = new CameraInputController(cam);
         Gdx.input.setInputProcessor(camController);
         
-        ModelLoader modelLoader = new G3dModelLoader(new JsonReader());
+        ModelLoader<?> modelLoader = new G3dModelLoader(new JsonReader());
         ModelData modelData = modelLoader.loadModelData(Gdx.files.internal(data+"/invaderscene.g3dj"));
         model = new Model(modelData, new TextureProvider.FileTextureProvider());
         doneLoading();
