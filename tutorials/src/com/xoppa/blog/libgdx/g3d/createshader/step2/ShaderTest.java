@@ -65,7 +65,7 @@ public class ShaderTest implements ApplicationListener {
           
         renderable = new Renderable();
         blockPart.setRenderable(renderable);
-        renderable.primitiveType = GL20.GL_POINTS;
+        renderable.meshPart.primitiveType = GL20.GL_POINTS;
         renderable.environment = null;
         renderable.worldTransform.idt();
           

@@ -62,10 +62,7 @@ public class TestShader implements Shader {
 	@Override
 	public void render(Renderable renderable) {
 		program.setUniformMatrix("u_worldTrans", renderable.worldTransform);
-		renderable.mesh.render(program,
-				renderable.primitiveType,
-				renderable.meshPartOffset,
-				renderable.meshPartSize);
+		renderable.meshPart.render(program);
 	}
 
 	@Override

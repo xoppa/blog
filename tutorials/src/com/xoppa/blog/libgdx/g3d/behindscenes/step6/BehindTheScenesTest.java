@@ -71,10 +71,7 @@ public class BehindTheScenesTest implements ApplicationListener {
         NodePart blockPart = model.getNode("ship").parts.get(0);
         
         renderable = new Renderable();
-        renderable.mesh = blockPart.meshPart.mesh;
-        renderable.meshPartOffset = blockPart.meshPart.indexOffset;
-        renderable.meshPartSize = blockPart.meshPart.numVertices;
-        renderable.primitiveType = blockPart.meshPart.primitiveType;
+        renderable.meshPart.set(blockPart.meshPart);
         renderable.material = blockPart.material;
         renderable.environment = environment;
         renderable.worldTransform.idt();

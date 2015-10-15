@@ -70,10 +70,7 @@ public class TestShader implements Shader {
 	public void render(Renderable renderable) {
 		program.setUniformMatrix(u_worldTrans, renderable.worldTransform);
 		program.setUniformf(u_color, MathUtils.random(), MathUtils.random(), MathUtils.random());
-		renderable.mesh.render(program,
-				renderable.primitiveType,
-				renderable.meshPartOffset,
-				renderable.meshPartSize);
+		renderable.meshPart.render(program);
 	}
 
 	@Override

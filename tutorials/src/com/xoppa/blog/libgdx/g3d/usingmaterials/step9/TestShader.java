@@ -118,8 +118,7 @@ public class TestShader implements Shader {
 				attribute.color1.b);
 		program.setUniformf(u_colorV, attribute.color2.r, attribute.color2.g,
 				attribute.color2.b);
-		renderable.mesh.render(program, renderable.primitiveType,
-				renderable.meshPartOffset, renderable.meshPartSize);
+		renderable.meshPart.render(program);
 	}
 
 	@Override

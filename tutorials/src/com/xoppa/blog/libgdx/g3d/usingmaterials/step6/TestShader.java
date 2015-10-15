@@ -76,10 +76,7 @@ public class TestShader implements Shader {
         Color colorV = Color.BLUE;
         program.setUniformf(u_colorU, colorU.r, colorU.g, colorU.b);
         program.setUniformf(u_colorV, colorV.r, colorV.g, colorV.b);
-		renderable.mesh.render(program,
-				renderable.primitiveType,
-				renderable.meshPartOffset,
-				renderable.meshPartSize);
+        renderable.meshPart.render(program);
 	}
 
 	@Override
