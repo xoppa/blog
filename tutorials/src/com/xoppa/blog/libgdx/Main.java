@@ -163,6 +163,16 @@ public class Main extends JFrame {
 			new AppDesc("step 4: add motion state", 640, 480, com.xoppa.blog.libgdx.g3d.bullet.dynamics.step4.BulletTest.class),
 			new AppDesc("step 5: contact callback filtering", 640, 480, com.xoppa.blog.libgdx.g3d.bullet.dynamics.step5.BulletTest.class),
 			new AppDesc("step 6: kinematic body", 640, 480, com.xoppa.blog.libgdx.g3d.bullet.dynamics.step6.BulletTest.class)
+		},
+		new Object[] {
+				"A simple card game",
+				new AppDesc("step 1: initial setup", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step1.CardGame.class, "cardgame/data"),
+				new AppDesc("step 2: use meaningfull units", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step2.CardGame.class, "cardgame/data"),
+				new AppDesc("step 3: structure the code", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step3.CardGame.class, "cardgame/data"),
+				new AppDesc("step 4: controlling the camera", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step4.CardGame.class, "cardgame/data"),
+				new AppDesc("step 5: add perspective", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step5.CardGame.class, "cardgame/data"),
+				new AppDesc("step 6: switch to ModelBatch", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step6.CardGame.class, "cardgame/data"),
+				new AppDesc("step 7: reduce render calls", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step7.CardGame.class, "cardgame/data")
 		}
 	};
 	

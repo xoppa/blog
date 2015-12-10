@@ -1,0 +1,412 @@
+
+carddeck.png
+size: 2048,2048
+format: RGBA8888
+filter: MipMapLinearLinear,Linear
+repeat: none
+back
+  rotate: false
+  xy: 2, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 1
+back
+  rotate: false
+  xy: 2, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 2
+back
+  rotate: false
+  xy: 204, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 3
+back
+  rotate: false
+  xy: 2, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 4
+back
+  rotate: false
+  xy: 204, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 5
+back
+  rotate: false
+  xy: 406, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 6
+clubs
+  rotate: false
+  xy: 2, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 1
+clubs
+  rotate: false
+  xy: 204, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 2
+clubs
+  rotate: false
+  xy: 406, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 3
+clubs
+  rotate: false
+  xy: 608, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 4
+clubs
+  rotate: false
+  xy: 2, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 5
+clubs
+  rotate: false
+  xy: 204, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 6
+clubs
+  rotate: false
+  xy: 406, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 7
+clubs
+  rotate: false
+  xy: 608, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 8
+clubs
+  rotate: false
+  xy: 810, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 9
+clubs
+  rotate: false
+  xy: 2, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 10
+clubs
+  rotate: false
+  xy: 204, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 11
+clubs
+  rotate: false
+  xy: 406, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 12
+clubs
+  rotate: false
+  xy: 608, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 13
+diamonds
+  rotate: false
+  xy: 810, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 1
+diamonds
+  rotate: false
+  xy: 1012, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 2
+diamonds
+  rotate: false
+  xy: 2, 2
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 3
+diamonds
+  rotate: false
+  xy: 204, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 4
+diamonds
+  rotate: false
+  xy: 406, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 5
+diamonds
+  rotate: false
+  xy: 608, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 6
+diamonds
+  rotate: false
+  xy: 810, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 7
+diamonds
+  rotate: false
+  xy: 1012, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 8
+diamonds
+  rotate: false
+  xy: 1214, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 9
+diamonds
+  rotate: false
+  xy: 204, 2
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 10
+diamonds
+  rotate: false
+  xy: 406, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 11
+diamonds
+  rotate: false
+  xy: 608, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 12
+diamonds
+  rotate: false
+  xy: 810, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 13
+hearts
+  rotate: false
+  xy: 1012, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 1
+hearts
+  rotate: false
+  xy: 1214, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 2
+hearts
+  rotate: false
+  xy: 1416, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 3
+hearts
+  rotate: false
+  xy: 406, 2
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 4
+hearts
+  rotate: false
+  xy: 608, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 5
+hearts
+  rotate: false
+  xy: 810, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 6
+hearts
+  rotate: false
+  xy: 1012, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 7
+hearts
+  rotate: false
+  xy: 1214, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 8
+hearts
+  rotate: false
+  xy: 1416, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 9
+hearts
+  rotate: false
+  xy: 1618, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 10
+hearts
+  rotate: false
+  xy: 608, 2
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 11
+hearts
+  rotate: false
+  xy: 810, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 12
+hearts
+  rotate: false
+  xy: 1012, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 13
+spades
+  rotate: false
+  xy: 1214, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 1
+spades
+  rotate: false
+  xy: 1416, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 2
+spades
+  rotate: false
+  xy: 1618, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 3
+spades
+  rotate: false
+  xy: 1820, 1676
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 4
+spades
+  rotate: false
+  xy: 810, 2
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 5
+spades
+  rotate: false
+  xy: 1012, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 6
+spades
+  rotate: false
+  xy: 1214, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 7
+spades
+  rotate: false
+  xy: 1416, 839
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 8
+spades
+  rotate: false
+  xy: 1618, 1118
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 9
+spades
+  rotate: false
+  xy: 1820, 1397
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 10
+spades
+  rotate: false
+  xy: 1012, 2
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 11
+spades
+  rotate: false
+  xy: 1214, 281
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 12
+spades
+  rotate: false
+  xy: 1416, 560
+  size: 200, 277
+  orig: 200, 277
+  offset: 0, 0
+  index: 13
