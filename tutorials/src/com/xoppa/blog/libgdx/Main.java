@@ -172,7 +172,9 @@ public class Main extends JFrame {
 				new AppDesc("step 4: controlling the camera", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step4.CardGame.class, "cardgame/data"),
 				new AppDesc("step 5: add perspective", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step5.CardGame.class, "cardgame/data"),
 				new AppDesc("step 6: switch to ModelBatch", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step6.CardGame.class, "cardgame/data"),
-				new AppDesc("step 7: reduce render calls", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step7.CardGame.class, "cardgame/data")
+				new AppDesc("step 7: reduce render calls", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step7.CardGame.class, "cardgame/data"),
+				new AppDesc("step 8: add a table", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step8.CardGame.class, "cardgame/data"),
+				new AppDesc("step 9: keep the cards on the table", 640, 480, com.xoppa.blog.libgdx.g3d.cardgame.step9.CardGame.class, "cardgame/data")
 		}
 	};
 	
