@@ -1,3 +1,4 @@
+
 package com.xoppa.blog.libgdx.g3d.bullet.collision.step1;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 
+/** @see https://xoppa.github.io/blog/using-the-libgdx-3d-physics-bullet-wrapper-part1/
+ * @author Xoppa */
 public class BulletTest implements ApplicationListener {
 	PerspectiveCamera cam;
 	CameraInputController camController;
@@ -27,12 +30,11 @@ public class BulletTest implements ApplicationListener {
 	ModelInstance ground;
 	ModelInstance ball;
 	boolean collision;
-	
-	
+
 	@Override
 	public void create () {
 		modelBatch = new ModelBatch();
-		
+
 		environment = new Environment();
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
@@ -44,7 +46,7 @@ public class BulletTest implements ApplicationListener {
 
 		camController = new CameraInputController(cam);
 		Gdx.input.setInputProcessor(camController);
-		
+
 		ModelBuilder mb = new ModelBuilder();
 		mb.begin();
 		mb.node().id = "ground";
@@ -54,46 +56,54 @@ public class BulletTest implements ApplicationListener {
 		mb.part("sphere", GL20.GL_TRIANGLES, Usage.Position | Usage.Normal, new Material(ColorAttribute.createDiffuse(Color.GREEN)))
 			.sphere(1f, 1f, 1f, 10, 10);
 		model = mb.end();
-		
+
 		ground = new ModelInstance(model, "ground");
 		ball = new ModelInstance(model, "ball");
 		ball.transform.setToTranslation(0, 9f, 0);
-		
+
 		instances = new Array<ModelInstance>();
 		instances.add(ground);
 		instances.add(ball);
 	}
-	
+
 	@Override
 	public void render () {
-		final float delta = Math.min(1f/30f, Gdx.graphics.getDeltaTime());
-		
+		final float delta = Math.min(1f / 30f, Gdx.graphics.getDeltaTime());
+
 		if (!collision) {
 			ball.transform.translate(0f, -delta, 0f);
 			collision = checkCollision();
 		}
-		
+
 		camController.update();
-		
+
 		Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1.f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		
+
 		modelBatch.begin(cam);
 		modelBatch.render(instances, environment);
 		modelBatch.end();
 	}
-	
-	boolean checkCollision() {
+
+	boolean checkCollision () {
 		return false;
 	}
-	
+
 	@Override
 	public void dispose () {
 		modelBatch.dispose();
 		model.dispose();
 	}
-	
-	@Override public void pause () {}
-	@Override public void resume () {}
-	@Override public void resize (int width, int height) {}
+
+	@Override
+	public void pause () {
+	}
+
+	@Override
+	public void resume () {
+	}
+
+	@Override
+	public void resize (int width, int height) {
+	}
 }

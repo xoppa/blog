@@ -39,6 +39,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
+/** @see https://xoppa.github.io/blog/using-the-libgdx-3d-physics-bullet-wrapper-part1/
+ * @author Xoppa */
 public class BulletTest implements ApplicationListener {
 	class MyContactListener extends ContactListener {
 		@Override

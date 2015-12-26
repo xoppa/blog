@@ -1,3 +1,4 @@
+
 package com.xoppa.blog.libgdx.g3d.bullet.dynamics.step3;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -41,11 +42,13 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
+/** @see https://xoppa.github.io/blog/using-the-libgdx-3d-physics-bullet-wrapper-part2/
+ * @author Xoppa */
 public class BulletTest implements ApplicationListener {
-	final static short GROUND_FLAG = 1<<8;
-	final static short OBJECT_FLAG = 1<<9;
+	final static short GROUND_FLAG = 1 << 8;
+	final static short OBJECT_FLAG = 1 << 9;
 	final static short ALL_FLAG = -1;
-	
+
 	class MyContactListener extends ContactListener {
 		@Override
 		public boolean onContactAdded (int userValue0, int partId0, int index0, int userValue1, int partId1, int index1) {
@@ -113,8 +116,8 @@ public class BulletTest implements ApplicationListener {
 	btDispatcher dispatcher;
 	MyContactListener contactListener;
 	btBroadphaseInterface broadphase;
-   btDynamicsWorld dynamicsWorld;
-   btConstraintSolver constraintSolver;
+	btDynamicsWorld dynamicsWorld;
+	btConstraintSolver constraintSolver;
 
 	@Override
 	public void create () {
@@ -163,20 +166,21 @@ public class BulletTest implements ApplicationListener {
 		constructors.put("box", new GameObject.Constructor(model, "box", new btBoxShape(new Vector3(0.5f, 0.5f, 0.5f)), 1f));
 		constructors.put("cone", new GameObject.Constructor(model, "cone", new btConeShape(0.5f, 2f), 1f));
 		constructors.put("capsule", new GameObject.Constructor(model, "capsule", new btCapsuleShape(.5f, 1f), 1f));
-		constructors.put("cylinder", new GameObject.Constructor(model, "cylinder", new btCylinderShape(new Vector3(.5f, 1f, .5f)), 1f));
+		constructors.put("cylinder", new GameObject.Constructor(model, "cylinder", new btCylinderShape(new Vector3(.5f, 1f, .5f)),
+			1f));
 
-      collisionConfig = new btDefaultCollisionConfiguration();
-      dispatcher = new btCollisionDispatcher(collisionConfig);
-      broadphase = new btDbvtBroadphase();
-      constraintSolver = new btSequentialImpulseConstraintSolver();
-      dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, constraintSolver, collisionConfig);
-      dynamicsWorld.setGravity(new Vector3(0, -10f, 0));
-      contactListener = new MyContactListener();
-       
-      instances = new Array<GameObject>();
-      GameObject object = constructors.get("ground").construct();
-      instances.add(object);
-      dynamicsWorld.addRigidBody(object.body, GROUND_FLAG, ALL_FLAG);
+		collisionConfig = new btDefaultCollisionConfiguration();
+		dispatcher = new btCollisionDispatcher(collisionConfig);
+		broadphase = new btDbvtBroadphase();
+		constraintSolver = new btSequentialImpulseConstraintSolver();
+		dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, constraintSolver, collisionConfig);
+		dynamicsWorld.setGravity(new Vector3(0, -10f, 0));
+		contactListener = new MyContactListener();
+
+		instances = new Array<GameObject>();
+		GameObject object = constructors.get("ground").construct();
+		instances.add(object);
+		dynamicsWorld.addRigidBody(object.body, GROUND_FLAG, ALL_FLAG);
 	}
 
 	public void spawn () {
@@ -194,7 +198,7 @@ public class BulletTest implements ApplicationListener {
 	public void render () {
 		final float delta = Math.min(1f / 30f, Gdx.graphics.getDeltaTime());
 
-		dynamicsWorld.stepSimulation(delta, 5, 1f/60f);
+		dynamicsWorld.stepSimulation(delta, 5, 1f / 60f);
 
 		for (GameObject obj : instances)
 			obj.body.getWorldTransform(obj.transform);
@@ -225,7 +229,7 @@ public class BulletTest implements ApplicationListener {
 		constructors.clear();
 
 		dynamicsWorld.dispose();
-      constraintSolver.dispose();
+		constraintSolver.dispose();
 		broadphase.dispose();
 		dispatcher.dispose();
 		collisionConfig.dispose();

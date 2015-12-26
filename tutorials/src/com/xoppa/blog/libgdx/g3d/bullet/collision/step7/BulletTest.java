@@ -1,3 +1,4 @@
+
 package com.xoppa.blog.libgdx.g3d.bullet.collision.step7;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -37,6 +38,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
+/** @see https://xoppa.github.io/blog/using-the-libgdx-3d-physics-bullet-wrapper-part1/
+ * @author Xoppa */
 public class BulletTest implements ApplicationListener {
 	class MyContactListener extends ContactListener {
 		@Override
@@ -153,7 +156,7 @@ public class BulletTest implements ApplicationListener {
 		broadphase = new btDbvtBroadphase();
 		collisionWorld = new btCollisionWorld(dispatcher, broadphase, collisionConfig);
 		contactListener = new MyContactListener();
-		
+
 		instances = new Array<GameObject>();
 		GameObject object = constructors.get("ground").construct();
 		instances.add(object);
@@ -182,7 +185,7 @@ public class BulletTest implements ApplicationListener {
 				obj.body.setWorldTransform(obj.transform);
 			}
 		}
-		
+
 		collisionWorld.performDiscreteCollisionDetection();
 
 		if ((spawnTimer -= delta) < 0) {
