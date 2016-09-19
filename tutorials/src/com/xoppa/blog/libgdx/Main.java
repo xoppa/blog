@@ -192,8 +192,10 @@ public class Main extends JFrame {
 		data = (appDesc.data == null || appDesc.data.isEmpty()) ? "data" : appDesc.data;
 		
 		Container container = getContentPane();
-		if (currentTest != null)
+		if (currentTest != null) {
+			currentTest.stop();	
 			container.remove(currentTest.getCanvas());
+		}
 		
 		currentTest = new LwjglAWTCanvas(listener);
 		currentTest.getCanvas().setSize(appDesc.width, appDesc.height);
